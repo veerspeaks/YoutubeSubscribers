@@ -33,7 +33,7 @@ app.get('/subscribers', async (req, res) => {
 // Get subscribers with only name and subscribedChannel
 app.get('/subscribers/names', async (req, res) => {
     try {
-        const nameAndChannel = await Subscriber.find().select('name subscribedChannel');
+        const nameAndChannel = await Subscriber.find().select('name subscribedChannel -_id');
         res.status(200).json(nameAndChannel);
     } catch (error) {
         console.error(error);  // Log the actual error for debugging
