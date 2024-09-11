@@ -2,13 +2,14 @@ const express = require('express')
 const app = require('./app.js')
 const mongoose = require('mongoose')
 const port = 3000
+require('dotenv').config(); // Load environment variables from .env file
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
 // Connect to DATABASE
-const DATABASE_URL = "mongodb+srv://accibc:passmongo@todomini.lavqw.mongodb.net/?retryWrites=true&w=majority&appName=toDomini";
+const DATABASE_URL = process.env.MONGODB_URI
 mongoose.connect(DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection
 db.on('error', (err) => console.log(err))
